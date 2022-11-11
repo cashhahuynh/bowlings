@@ -13,10 +13,4 @@ public class HelloWorldController {
         return "hello";
     }
 
-    @GetMapping("test")
-    @ResponseBody
-    public String test() {
-        return "something";
-    }
-
 }
