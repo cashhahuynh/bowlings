@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloWorldController {
 
-    @GetMapping(value = "hello")
+    @GetMapping(value = "")
     public String welcome() {
         return "hello";
+    }
+
+    @GetMapping("test")
+    @ResponseBody
+    public String test() {
+        return "something";
     }
 
 }
