@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HelloWorldController {
-    @GetMapping(value = "")
+    @GetMapping(value = "bowl")
     public String welcome() {
-        return "hello";
+        return "LaunchBowl";
     }
 }
