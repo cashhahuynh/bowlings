@@ -1,16 +1,17 @@
 package com.launchcode.bowling.controllers;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class HelloWorldController {
+@RequestMapping("register")
+public class UserController {
 
-    @GetMapping(value = "hello")
-    public String welcome() {
-        return "hello";
+    @GetMapping(value = "user")
+    public String register() {
+        return "user/register";
     }
 
 }
