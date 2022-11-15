@@ -12,5 +12,4 @@ public class User extends AbstractEntity{
     private int id;
 
     public User() {}
-
 }
