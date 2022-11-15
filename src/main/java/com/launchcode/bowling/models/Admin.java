@@ -12,4 +12,5 @@ public class Admin extends AbstractEntity{
     private int id;
 
     public Admin() {}
+
 }
