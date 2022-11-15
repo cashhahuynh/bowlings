@@ -1,4 +1,4 @@
-package com.launchcode.bowling.data;
+package com.launchcode.bowling.models.data;
 
 
 import com.launchcode.bowling.models.Admin;
