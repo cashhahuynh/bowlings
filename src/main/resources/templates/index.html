@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> <!--edit meta tag?-->
     <title>Title</title>
 </head>
 <body>
 
 <h1>Login</h1>
 
-<form>
-    <div>
-        <label for="submit">Username</label>
-        <input type="text" class="submit" id="submit"/>
+<form action="" method="get"> <!--onsubmit attribute?-->
+    <div> <!--need to include a div class?-->
+        <label for="submit">Username</label> <!--might need to work on errors here-->
+        <input type="text" class="submit" id="submit"/> <!--i dont think mvc knows that these variables exist in User model?-->
     </div>
 
     <div>
@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        <input type="submit"/>
+        <input type="submit" value="Log in"/>
     </div>
 
 </form>
