@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     @GetMapping(value = "admin")
-        public String register() {
-            return "admin/register";
-        }
+    public String register() {
+        return "admin/register";
+    }
 
 }
+

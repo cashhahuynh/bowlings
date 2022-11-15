@@ -1,3 +1,4 @@
+
 package com.launchcode.bowling.controllers;
 
 import org.springframework.stereotype.Controller;
@@ -15,5 +16,5 @@ public class HomeController {
     public String register() {
         return "registrationType";
     }
-
 }
+
