@@ -44,5 +44,4 @@ public class HomeController { //home controller is not going to be storing new o
     public String register() {
         return "registrationType";
     }
-
 }
