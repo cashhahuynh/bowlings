@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: header"></nav>
+
+<h1>Add Score</h1>
+
+<form method="post" style="max-width:600px;">
+  <div class="form-group">
+    <label th:for="score">Score</label>
+    <input class="form-control" th:field="${score.score}" />
+    <span th:errors="${score.score}" class="error"></span>
+  </div>
+
+
+  <input type="submit" value="Add Score" />
+</form>
+
+</body>
+</html>
