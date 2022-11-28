@@ -3,6 +3,7 @@ package com.launchcode.bowling.controllers;
 
 import com.launchcode.bowling.models.Score;
 import com.launchcode.bowling.models.data.ScoreRepository;
+import com.launchcode.bowling.models.data.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,13 @@ public class HomeController {
     @Autowired
     private ScoreRepository scoreRepository;
 
+    @Autowired
+    private TeamRepository teamRepository;
+
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("scores", scoreRepository.findAll());
+        model.addAttribute("teams", teamRepository.findAll());
         return "index";
     }
 
@@ -42,7 +47,10 @@ public class HomeController {
         return "redirect:";
     }
 
-
+    //user will select a score when they create a new team?
+    //add team data from repository
+    //checkout template for name of variables
+    //processAddTeamForm?...will need request param
 
 }
 
