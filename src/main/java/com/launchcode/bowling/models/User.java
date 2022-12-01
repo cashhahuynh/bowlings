@@ -1,6 +1,7 @@
 package com.launchcode.bowling.models;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -13,13 +14,18 @@ public class User extends AbstractEntity{
     @NotNull
     private String pwHash;
 
+    @ManyToOne()
+    private Team team;
+
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public User() {}
 
-    public User(String username, String password) {
+    public User(String username, String password, Team aTeam) {
+        super();
         this.username = username;
         this.pwHash = encoder.encode(password);
+        this.team = aTeam;
     }
 
     public String getUsername() {
@@ -28,5 +34,13 @@ public class User extends AbstractEntity{
 
     public boolean isMatchingPassword(String password) {
         return encoder.matches(password, pwHash);
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }

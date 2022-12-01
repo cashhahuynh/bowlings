@@ -1,10 +1,12 @@
 package com.launchcode.bowling.models.dto;
 
+import com.launchcode.bowling.models.Team;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class LoginFormDTO {
+public class LoginFormDTO { //11:20 am 11/30 edit
 
     @NotNull
     @NotBlank
@@ -31,4 +33,5 @@ public class LoginFormDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

@@ -7,9 +7,9 @@ import javax.validation.constraints.Size;
 @Entity
 public class Score extends AbstractEntity {
 
-    //11/28 addition
-    @ManyToOne()
-    private Team team;
+//    //11/28 addition
+//    @ManyToOne()
+//    private Team team;
 
     @Size(max=300)
     private Integer score;

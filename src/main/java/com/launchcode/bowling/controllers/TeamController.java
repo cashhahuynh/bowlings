@@ -39,6 +39,12 @@ public class TeamController {
         return "redirect:";
     }
 
+    @GetMapping("view")
+    private String index(Model model) {
+        model.addAttribute("teams", teamRepository.findAll());
+        return "view";
+    }
+
     // thinking about view for team member profile with scores and usernames.
     // thomas might need to include a dropdown of current team members that have been created in order to submit scores?
     // one score can be associated with multiple team members. one to many relationship?

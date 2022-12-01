@@ -32,6 +32,7 @@ public class HomeController {
     @GetMapping("add")
     public String displayAddScoreForm(Model model) {
         model.addAttribute(new Score());
+        model.addAttribute("teams", teamRepository.findAll());
         return "add";
     }
 
@@ -46,11 +47,6 @@ public class HomeController {
         scoreRepository.save(newScore);
         return "redirect:";
     }
-
-    //user will select a score when they create a new team?
-    //add team data from repository
-    //checkout template for name of variables
-    //processAddTeamForm?...will need request param
 
 }
 

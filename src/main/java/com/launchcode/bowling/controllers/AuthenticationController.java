@@ -1,6 +1,8 @@
 package com.launchcode.bowling.controllers;
 
+import com.launchcode.bowling.models.Team;
 import com.launchcode.bowling.models.User;
+import com.launchcode.bowling.models.data.TeamRepository;
 import com.launchcode.bowling.models.data.UserRepository;
 import com.launchcode.bowling.models.dto.LoginFormDTO;
 import com.launchcode.bowling.models.dto.RegisterFormDTO;
@@ -11,10 +13,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +26,9 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TeamRepository teamRepository;
 
     private static final String userSessionKey = "user";
 
@@ -48,17 +55,27 @@ public class AuthenticationController {
     public String displayRegistrationForm(Model model) {
         model.addAttribute("registerFormDTO", new RegisterFormDTO());
         model.addAttribute("title", "Register");
+        model.addAttribute("teams", teamRepository.findAll());
         return "register";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register") //need to query teamRepo and then set to user?
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
-                                          Model model) {
+                                          Model model, @RequestParam(required = false) int teamId, @RequestParam(required = false) List<Integer> teams) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
             return "register";
+        }
+
+        //List<Team> teamObjs = (List<Team>) teamRepository.findAllById(teams);
+        //new. seeing how set team behaves...
+        //using conditionals to read optional argument
+        Team teamIdentity = new Team();
+        Optional<Team> team = teamRepository.findById(teamId);
+        if (!team.isEmpty()) {
+            teamIdentity = team.get();
         }
 
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
@@ -77,7 +94,9 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getTeam());
+        //need to set team to user here.
+        newUser.setTeam(teamIdentity);
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 

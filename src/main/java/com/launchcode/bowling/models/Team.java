@@ -13,46 +13,51 @@ import java.util.List;
 @Entity
 public class Team extends AbstractEntity {
 
+    //something is weird here now...
+    @Size(min=3, message="The team name has to have a minimum of five characters.")
     @NotNull
     @NotBlank
-    @Size(min=3, message="The team member's first name has to have a minimum of three characters.")
-    private String firstName;
-
-    @NotNull
-    @NotBlank
-    @Size(min=3, message ="The team member's last name has to have a minimum of three characters.")
-    private String lastName;
+    private String name;
 
     //11/28 addition
     @OneToMany()
-    @JoinColumn(name = "score_id")
-    private final List<Score> scores = new ArrayList<>();
+    @JoinColumn(name = "user_id") //where does this name show up?
+    private final List<User> users = new ArrayList<>();
 
     public Team () {};
 
-    public Team (String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Team (String name) {
+        this.name = name;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override //revisit this
+    @Override
     public String toString() {
-        return firstName + lastName;
+        return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Team)) return false;
+        if (!super.equals(o)) return false;
+
+        Team team = (Team) o;
+
+        return getName() != null ? getName().equals(team.getName()) : team.getName() == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        return result;
     }
 }

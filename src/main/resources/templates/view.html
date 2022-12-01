@@ -5,11 +5,20 @@
 
 <nav th:replace="fragments :: header"></nav>
 
-<!--<div class="container body-content">-->
+<div class="container body-content">
 
-<!--</div>-->
+        <table th:each="team : ${teams}">
+        <tr>
+            <th>ID:</th>
+            <th>Team:</th>
+        </tr>
+        <tr>
+            <td th:text="${team.id}"></td>
+            <td th:text="${team.name}"></td>
+        </tr>
+        </table>
 
-
+</div>
 
 </body>
 </html>

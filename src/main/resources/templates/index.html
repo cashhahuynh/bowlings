@@ -7,24 +7,6 @@
 
 <div class="container body-content">
     <h2>LaunchBowl</h2>
-    <ul>
-        <li th:each="score : ${scores}">
-        </li>
-    </ul>
-
-    <table th:each="team : ${teams}">
-    <tr>
-        <th>ID:</th>
-        <th>First name:</th>
-        <th>Last name:</th>
-    </tr>
-    <tr>
-        <td th:text="${team.id}"></td>
-        <td th:text="${team.firstName}"></td>
-        <td th:text="${team.lastName}"></td>
-    </tr>
-    </table>
-    <a th:href="@{'/team'}">Add team members</a>
 
 </div>
 

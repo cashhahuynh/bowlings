@@ -7,18 +7,15 @@
 
 <h1>Add Team</h1>
 
-<form method="post" style="max-width:600px;"> <!--need to add other things to form-->
+<form method="post" style="max-width:600px;">
     <div class="form-group">
-        <label th:for="firstName">First name</label>
-        <input class="form-control" th:field="${team.firstName}" id="firstName" />
-        <span th:errors="${team.firstName}" class="error"></span>
+        <label th:for="team">Team name</label>
+        <input class="form-control" th:field="${team.name}" id="team" />
+        <span th:errors="${team.name}" class="error"></span>
 
-        <label th:for="lastName">Last name</label>
-        <input class="form-control" th:field="${team.lastName}" id="lastName"/>
-        <span th:errors="${team.lastName}" class="error"></span>
+        <!--work on user list-->
 
     </div>
-
 
     <input type="submit" value="Add Team" />
 </form>
