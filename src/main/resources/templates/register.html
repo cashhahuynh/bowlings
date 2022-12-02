@@ -24,8 +24,9 @@
         </label>
     </div>
 
-    <!--i wonder if this has to be hidden?- nope.-->
-    <div class="form-group">
+    <button type="button" onclick="document.getElementById('teamSelection').style.visibility = 'visible'">Register with a team</button>
+
+    <div class="form-group" id="teamSelection">
         <label th:for="team">Team</label>
         <select name="teamId">
             <option value="0"> </option>

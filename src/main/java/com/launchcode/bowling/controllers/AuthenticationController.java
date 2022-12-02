@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.Document;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -59,25 +60,17 @@ public class AuthenticationController {
         return "register";
     }
 
-    @PostMapping("/register") //need to query teamRepo and then set to user?
+    @PostMapping("/register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model, @RequestParam(required = false) int teamId, @RequestParam(required = false) List<Integer> teams) {
-        //does the order matter?
-        if (errors.hasErrors()) { //issue is that it's not reading this
+
+        if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
+            model.addAttribute("teams", teamRepository.findAll());
             return "register";
         }
 
-        //List<Team> teamObjs = (List<Team>) teamRepository.findAllById(teams);
-        //new. seeing how set team behaves...
-        Team teamIdentity = new Team();
-        Optional<Team> team = teamRepository.findById(teamId);
-        if (!team.isEmpty()) { //i wonder if it's because this if/else statement isn't completed? thought about else statement
-            teamIdentity = team.get();
-        }
-
-        //need to query and set users properly
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
 
         if (existingUser != null) {
@@ -94,16 +87,19 @@ public class AuthenticationController {
             return "register";
         }
 
+        //List<Team> teamObjs = (List<Team>) teamRepository.findAllById(teams);
+        Team teamIdentity = new Team();
+        Optional<Team> team = teamRepository.findById(teamId);
+        if (!team.isEmpty()) { //i wonder if it's because this if/else statement isn't completed? thought about else statement
+            teamIdentity = team.get();
+        } else {
+            teamIdentity = null;
+        }
+
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getTeam());
-        //need to set team to user here. what if i need an if/else statement here?
         newUser.setTeam(teamIdentity);
         userRepository.save(newUser);
-//        if (registerFormDTO.getTeam().equals("")) { //thinking this can process empty teams if all data is deleted. had to rewrite equals method
-//            userRepository.save(newUser);
-//        } else {
-//            newUser.setTeam(teamIdentity);
-//            userRepository.save(newUser);
-//        }
+
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";
