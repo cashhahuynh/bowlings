@@ -63,21 +63,21 @@ public class AuthenticationController {
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
                                           Model model, @RequestParam(required = false) int teamId, @RequestParam(required = false) List<Integer> teams) {
-
-        if (errors.hasErrors()) {
+        //does the order matter?
+        if (errors.hasErrors()) { //issue is that it's not reading this
             model.addAttribute("title", "Register");
             return "register";
         }
 
         //List<Team> teamObjs = (List<Team>) teamRepository.findAllById(teams);
         //new. seeing how set team behaves...
-        //using conditionals to read optional argument
         Team teamIdentity = new Team();
         Optional<Team> team = teamRepository.findById(teamId);
-        if (!team.isEmpty()) {
+        if (!team.isEmpty()) { //i wonder if it's because this if/else statement isn't completed? thought about else statement
             teamIdentity = team.get();
         }
 
+        //need to query and set users properly
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
 
         if (existingUser != null) {
@@ -95,9 +95,15 @@ public class AuthenticationController {
         }
 
         User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getTeam());
-        //need to set team to user here.
+        //need to set team to user here. what if i need an if/else statement here?
         newUser.setTeam(teamIdentity);
         userRepository.save(newUser);
+//        if (registerFormDTO.getTeam().equals("")) { //thinking this can process empty teams if all data is deleted. had to rewrite equals method
+//            userRepository.save(newUser);
+//        } else {
+//            newUser.setTeam(teamIdentity);
+//            userRepository.save(newUser);
+//        }
         setUserInSession(request.getSession(), newUser);
 
         return "redirect:";

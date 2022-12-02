@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-public class LoginFormDTO { //11:20 am 11/30 edit
+public class LoginFormDTO {
 
     @NotNull
     @NotBlank

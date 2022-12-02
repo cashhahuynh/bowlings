@@ -20,8 +20,8 @@ public class Team extends AbstractEntity {
     private String name;
 
     //11/28 addition
-    @OneToMany()
-    @JoinColumn(name = "user_id") //where does this name show up?
+    @OneToMany(mappedBy = "team")
+    //@JoinColumn(name = "user_id") //where does this name show up?
     private final List<User> users = new ArrayList<>();
 
     public Team () {};
@@ -36,6 +36,11 @@ public class Team extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    //12/1 addition
+    public List<User> getUsers() {
+        return users;
     }
 
     @Override

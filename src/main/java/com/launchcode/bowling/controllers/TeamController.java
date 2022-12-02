@@ -1,17 +1,17 @@
 package com.launchcode.bowling.controllers;
 
 import com.launchcode.bowling.models.Team;
+import com.launchcode.bowling.models.User;
 import com.launchcode.bowling.models.data.TeamRepository;
+import com.launchcode.bowling.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "team")
@@ -20,23 +20,41 @@ public class TeamController {
     @Autowired
     private TeamRepository teamRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @GetMapping("")
     private String addTeamDisplay(Model model) {
         model.addAttribute(new Team());
+        model.addAttribute("users", userRepository.findAll());
         return "addTeam";
     }
 
-    @PostMapping("")
+    @PostMapping("") //user isn't being selected for team. think requestparam is teamId...? changed class type from user to team.
     private String displayTeam(@ModelAttribute @Valid Team newTeam,
-                               Errors errors) {
+                               Errors errors, @RequestParam(required = false) Integer teamId, Model model) {
 
         if (errors.hasErrors()) {
             return "addTeam";
         }
 
+        if (teamId == null) {
+            model.addAttribute("title", "All teams");
+            model.addAttribute("teams", teamRepository.findAll());
+        } else {
+            Optional<Team> result = teamRepository.findById(teamId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid id.");
+            } else {
+                Team team = result.get();
+                model.addAttribute("title", "Team in category: " + newTeam.getName());
+                model.addAttribute("team", newTeam.getUsers());
+            }
+        }
+
         teamRepository.save(newTeam);
 
-        return "redirect:";
+        return "/view";
     }
 
     @GetMapping("view")
@@ -44,9 +62,5 @@ public class TeamController {
         model.addAttribute("teams", teamRepository.findAll());
         return "view";
     }
-
-    // thinking about view for team member profile with scores and usernames.
-    // thomas might need to include a dropdown of current team members that have been created in order to submit scores?
-    // one score can be associated with multiple team members. one to many relationship?
 
 }
