@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: header"></nav>
+
+<table class="table table-striped">
+    <thred>
+        <tr>
+            <th>Team:</th>
+            <th>Team members:</th>
+        </tr>
+    </thred>
+    <tr th:each="team : ${teams}">
+        <td th:text="${team.name}"></td>
+        <td th:text="${team.users}"></td>
+    </tr>
+</table>
 
 </body>
 </html>

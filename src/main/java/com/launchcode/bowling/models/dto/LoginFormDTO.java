@@ -1,5 +1,8 @@
 package com.launchcode.bowling.models.dto;
 
+import com.launchcode.bowling.models.Team;
+
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

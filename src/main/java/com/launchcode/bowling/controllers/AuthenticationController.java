@@ -1,6 +1,8 @@
 package com.launchcode.bowling.controllers;
 
 import com.launchcode.bowling.models.User;
+import com.launchcode.bowling.models.data.ScoreRepository;
+import com.launchcode.bowling.models.data.TeamRepository;
 import com.launchcode.bowling.models.data.UserRepository;
 import com.launchcode.bowling.models.dto.LoginFormDTO;
 import com.launchcode.bowling.models.dto.RegisterFormDTO;
@@ -11,10 +13,12 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +26,12 @@ public class AuthenticationController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ScoreRepository scoreRepository;
+
+    @Autowired
+    TeamRepository teamRepository;
 
     private static final String userSessionKey = "user";
 
@@ -48,16 +58,18 @@ public class AuthenticationController {
     public String displayRegistrationForm(Model model) {
         model.addAttribute("registerFormDTO", new RegisterFormDTO());
         model.addAttribute("title", "Register");
+        model.addAttribute("teams", teamRepository.findAll());
         return "register";
     }
 
     @PostMapping("/register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
-                                          Model model) {
+                                          Model model, @RequestParam(required = false) int teamId, @RequestParam(required = false) List<Integer> teams) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
+            model.addAttribute("teams", teamRepository.findAll());
             return "register";
         }
 
@@ -77,7 +89,7 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getTeam());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 

@@ -5,14 +5,29 @@
 
 <nav th:replace="fragments :: header"></nav>
 
-<div class="container body-content">
-    <h2>LaunchBowl</h2>
-    <ul>
-        <li th:each="score : ${scores}">
-        </li>
-    </ul>
+<!--<div class="container body-content">-->
+<!--    <h2>LaunchBowl</h2>-->
+<!--    <ul>-->
+<!--        <li th:each="score : ${scores}">-->
+<!--        <li th:each="user : ${users}">-->
+<!--        </li>-->
+<!--    </ul>-->
 
-</div>
+<!--</div>-->
+    <table class="table table-striped">
+        <thred>
+            <tr>
+                <th>User:</th>
+                <th>Score:</th>
+                <th>Team:</th>
+            </tr>
+        </thred>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.username}"></td>
+<!--            <td th:text="${score.score}"></td>-->
+<!--            <td th:text="${team.name}"></td>-->
+        </tr>
+    </table>
 
 </body>
 </html>

@@ -24,6 +24,18 @@
         </label>
     </div>
 
+    <button type="button" onclick="document.getElementById('teamSelection').style.visibility = 'visible'">Register with a team</button>
+
+    <div class="form-group" id="teamSelection">
+        <label th:for="team">Team</label>
+        <select name="teamId">
+            <option value="0"> </option>
+            <option th:each="team : ${teams}"
+                    th:text="${team.name}"
+                    th:value="${team.id}"></option>
+        </select>
+    </div>
+
     <input type="submit" class="btn btn-primary" value="Register" />
 </form>
 
