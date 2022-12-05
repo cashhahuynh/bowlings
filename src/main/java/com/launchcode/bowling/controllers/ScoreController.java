@@ -1,21 +1,18 @@
 package com.launchcode.bowling.controllers;
 
 import com.launchcode.bowling.models.Score;
+import com.launchcode.bowling.models.User;
 import com.launchcode.bowling.models.data.ScoreRepository;
 import com.launchcode.bowling.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @Controller
-//@RequestMapping(value = "score")
 public class ScoreController {
 
     @Autowired
@@ -37,15 +34,23 @@ public class ScoreController {
         return "add";
     }
 
+//    @RequestParam Integer userId)
+
     @PostMapping("add")
     public String processAddScoreForm(@ModelAttribute @Valid Score newScore,
-                                      Errors errors) {
+                                      Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Score");
             return "add";
         }
+//        else {
+//            User newUser = userRepository.findByUsername(registerFormDTO.getUsername()).orElse(new User());
+//            newUser.setUser(newUser);
+//
+//        }
 
         scoreRepository.save(newScore);
-        return "redirect:";
+        return "/add";
     }
 }

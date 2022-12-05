@@ -25,13 +25,13 @@ import java.util.Optional;
 public class AuthenticationController {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
     ScoreRepository scoreRepository;
 
     @Autowired
-    TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
     private static final String userSessionKey = "user";
 

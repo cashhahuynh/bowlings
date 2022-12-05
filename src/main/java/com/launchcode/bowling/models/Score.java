@@ -1,8 +1,6 @@
 package com.launchcode.bowling.models;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,16 +9,23 @@ import java.util.List;
 public class Score extends AbstractEntity {
 
 //    @Size(max=300)
+//    @Size (max = 300, message = "Score must be 300 or lower!")
     private Integer score;
 
-//    @OneToMany(mappedBy = "score")
-    @ElementCollection
-    private final List<User> users = new ArrayList<>();
+//    @ManyToMany
+////    @ElementCollection
+
+//    (mappedBy = "scores")
+//    private List<User> users = new ArrayList<>();
+    @ManyToOne
+    private User user;
+
 
     public Score(){}
 
-    public Score(Integer score) {
+    public Score(Integer score, User user) {
         this.score = score;
+        this.user = user;
     }
 
     public Integer getScore() {
@@ -31,8 +36,12 @@ public class Score extends AbstractEntity {
         this.score = score;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
