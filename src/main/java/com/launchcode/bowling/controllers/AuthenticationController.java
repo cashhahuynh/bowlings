@@ -62,20 +62,11 @@ public class AuthenticationController {
     @PostMapping("/register") //need to query teamRepo and then set to user?
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
-                                          Model model, @RequestParam(required = false) int teamId, @RequestParam(required = false) List<Integer> teams) {
+                                          Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
             return "register";
-        }
-
-        //List<Team> teamObjs = (List<Team>) teamRepository.findAllById(teams);
-        //new. seeing how set team behaves...
-        //using conditionals to read optional argument
-        Team teamIdentity = new Team();
-        Optional<Team> team = teamRepository.findById(teamId);
-        if (!team.isEmpty()) {
-            teamIdentity = team.get();
         }
 
         User existingUser = userRepository.findByUsername(registerFormDTO.getUsername());
@@ -94,9 +85,7 @@ public class AuthenticationController {
             return "register";
         }
 
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword(), registerFormDTO.getTeam());
-        //need to set team to user here.
-        newUser.setTeam(teamIdentity);
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
         userRepository.save(newUser);
         setUserInSession(request.getSession(), newUser);
 

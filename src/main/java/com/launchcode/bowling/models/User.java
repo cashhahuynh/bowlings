@@ -21,11 +21,10 @@ public class User extends AbstractEntity{
 
     public User() {}
 
-    public User(String username, String password, Team aTeam) {
+    public User(String username, String password) {
         super();
         this.username = username;
         this.pwHash = encoder.encode(password);
-        this.team = aTeam;
     }
 
     public String getUsername() {
