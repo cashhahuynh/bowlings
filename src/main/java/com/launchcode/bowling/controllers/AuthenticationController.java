@@ -61,11 +61,11 @@ public class AuthenticationController {
         model.addAttribute("teams", teamRepository.findAll());
         return "register";
     }
-
+//    @RequestParam(required = false) int teamId, @RequestParam(required = false) List<Integer> teams
     @PostMapping("/register")
     public String processRegistrationForm(@ModelAttribute @Valid RegisterFormDTO registerFormDTO,
                                           Errors errors, HttpServletRequest request,
-                                          Model model, @RequestParam(required = false) int teamId, @RequestParam(required = false) List<Integer> teams) {
+                                          Model model) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");

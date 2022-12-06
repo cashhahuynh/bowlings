@@ -9,9 +9,19 @@
 
 <form method="post" style="max-width:600px;">
   <div class="form-group">
-    <label th:for="score">Score</label>
-    <input class="form-control" th:field="${score.score}" />
-    <span th:errors="${score.score}" class="error"></span>
+    <label th:for="score">Game One Score</label>
+    <input class="form-control" th:field="${score.gameOneScore}" />
+    <span th:errors="${score.gameOneScore}" class="error"></span>
+  </div>
+  <div class="form-group">
+    <label th:for="score">Game Two Score</label>
+    <input class="form-control" th:field="${score.gameTwoScore}" />
+    <span th:errors="${score.gameTwoScore}" class="error"></span>
+  </div>
+  <div class="form-group">
+    <label th:for="score">Game Three Score</label>
+    <input class="form-control" th:field="${score.gameThreeScore}" />
+    <span th:errors="${score.gameThreeScore}" class="error"></span>
   </div>
 
 <!--  <div class="form-group" id="userSelection">-->

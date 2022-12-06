@@ -1,6 +1,7 @@
 package com.launchcode.bowling.models;
 
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -17,12 +18,15 @@ public class Team extends AbstractEntity {
     private String name;
 
     @OneToMany(mappedBy = "team")
-    private final List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
+
 
     public Team () {};
 
-    public Team (String name) {
+    public Team (String name, List<User> users) {
+        super();
         this.name = name;
+        this.users = users;
     }
 
     public String getName() {
@@ -35,6 +39,10 @@ public class Team extends AbstractEntity {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     @Override

@@ -18,14 +18,25 @@
         <thred>
             <tr>
                 <th>User:</th>
-                <th>Score:</th>
+                <th>Game One Score:</th>
+                <th>Game Two Score:</th>
+                <th>Game Three Score:</th>
                 <th>Team:</th>
             </tr>
         </thred>
         <tr th:each="user : ${users}">
             <td th:text="${user.username}"></td>
-<!--            <td th:text="${score.user.score}"></td>-->
+<!--            <td th:href="@{'/employers/view/' + ${job.employer.id}}" th:text="${job.employer.name}"></td>-->
+<!--        <tr th:each="score : ${scores}">-->
+<!--            <td th:text="${score.gameOneScore}"></td>-->
 <!--            <td th:text="${user.team}"></td>-->
+        </tr>
+        <tr th:each="score : ${scores}">
+            <td th:text="${score.gameOneScore}"></td>
+            <td th:text="${score.gameTwoScore}"></td>
+            <td th:text="${score.gameThreeScore}"></td>
+            <!--            <td th:text="${score.user.score}"></td>-->
+            <!--            <td th:text="${user.team}"></td>-->
         </tr>
     </table>
 

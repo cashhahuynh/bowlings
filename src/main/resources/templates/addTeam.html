@@ -14,12 +14,24 @@
     <span th:errors="${team.name}" class="error"></span>
   </div>
 
+  <div class="form-group">
+    <label th:for="users">Users:</label>
+    <th:block th:each="user : ${users}">
+      <input type="checkbox" name="users" th:value="${user.id}"/>
+      <label th:text="${user.username}"></label>
+    </th:block>
+  </div>
+
 <!--  <div class="form-group">-->
-<!--    <label th:for="users">Users:</label>-->
-<!--    <th:block th:each="user : ${users}">-->
-<!--      <input type="checkbox" name="users" th:value="${user.id}"/>-->
-<!--      <label th:text="${user.username}"></label>-->
-<!--    </th:block>-->
+<!--    <label>User-->
+<!--      <select th:field="${team.user}">-->
+<!--        <option th:each="user : ${users}"-->
+<!--                th:value="${user.id}"-->
+<!--                th:text="${user.username}"-->
+<!--        ></option>-->
+<!--      </select>-->
+<!--      <p class="error" th:errors="${team.user}"></p>-->
+<!--    </label>-->
 <!--  </div>-->
 
   <input type="submit" value="Add Team" />

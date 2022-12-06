@@ -24,17 +24,17 @@
         </label>
     </div>
 
-    <button type="button" onclick="document.getElementById('teamSelection').style.visibility = 'visible'">Register with a team</button>
+<!--    <button type="button" onclick="document.getElementById('teamSelection').style.visibility = 'visible'">Register with a team</button>-->
 
-    <div class="form-group" id="teamSelection">
-        <label th:for="team">Team</label>
-        <select name="teamId">
-            <option value="0"> </option>
-            <option th:each="team : ${teams}"
-                    th:text="${team.name}"
-                    th:value="${team.id}"></option>
-        </select>
-    </div>
+<!--    <div class="form-group" id="teamSelection">-->
+<!--        <label th:for="team">Team</label>-->
+<!--        <select name="teamId">-->
+<!--            <option value="0"> </option>-->
+<!--            <option th:each="team : ${teams}"-->
+<!--                    th:text="${team.name}"-->
+<!--                    th:value="${team.id}"></option>-->
+<!--        </select>-->
+<!--    </div>-->
 <!--    <div class="form-group">-->
 <!--        <label>Team-->
 <!--            <select th:field="${user.team}">-->
@@ -43,8 +43,16 @@
 <!--                        th:text="${team.name}"-->
 <!--                ></option>-->
 <!--            </select>-->
-<!--            <p class="error" th:errors="${event.eventCategory}"></p>-->
+<!--            <p class="error" th:errors="${user.team}"></p>-->
 <!--        </label>-->
+<!--    </div>-->
+
+<!--    <div class="form-group">-->
+<!--        <label th:for="team">Team</label>-->
+<!--        <th:block th:each="team : ${teams}">-->
+<!--            <input type="checkbox" name="teams" th:value="${team.id}">-->
+<!--            <label th:text="${team.name}"></label>-->
+<!--        </th:block>-->
 <!--    </div>-->
 
     <input type="submit" class="btn btn-primary" value="Register" />

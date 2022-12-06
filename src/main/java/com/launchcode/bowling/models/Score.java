@@ -1,16 +1,17 @@
 package com.launchcode.bowling.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Score extends AbstractEntity {
 
 //    @Size(max=300)
 //    @Size (max = 300, message = "Score must be 300 or lower!")
-    private Integer score;
+    private Integer gameOneScore;
+
+    private Integer gameTwoScore;
+
+    private Integer gameThreeScore;
 
 //    @ManyToMany
 ////    @ElementCollection
@@ -23,17 +24,35 @@ public class Score extends AbstractEntity {
 
     public Score(){}
 
-    public Score(Integer score, User user) {
-        this.score = score;
+    public Score(Integer gameOneScore, Integer gameTwoScore, Integer gameThreeScore, User user) {
+        this.gameOneScore = gameOneScore;
+        this.gameTwoScore = gameTwoScore;
+        this.gameThreeScore = gameThreeScore;
         this.user = user;
     }
 
-    public Integer getScore() {
-        return score;
+    public Integer getGameOneScore() {
+        return gameOneScore;
     }
 
-    public void setScore(Integer score) {
-        this.score = score;
+    public void setGameOneScore(Integer gameOneScore) {
+        this.gameOneScore = gameOneScore;
+    }
+
+    public Integer getGameTwoScore() {
+        return gameTwoScore;
+    }
+
+    public void setGameTwoScore(Integer gameTwoScore) {
+        this.gameTwoScore = gameTwoScore;
+    }
+
+    public Integer getGameThreeScore() {
+        return gameThreeScore;
+    }
+
+    public void setGameThreeScore(Integer gameThreeScore) {
+        this.gameThreeScore = gameThreeScore;
     }
 
     public User getUser() {
@@ -46,6 +65,6 @@ public class Score extends AbstractEntity {
 
     @Override
     public String toString() {
-        return score.toString();
+        return gameOneScore.toString();
     }
 }
