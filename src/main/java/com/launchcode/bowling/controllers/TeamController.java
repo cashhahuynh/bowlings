@@ -1,6 +1,7 @@
 package com.launchcode.bowling.controllers;
 
 import com.launchcode.bowling.models.Team;
+import com.launchcode.bowling.models.User;
 import com.launchcode.bowling.models.data.TeamRepository;
 import com.launchcode.bowling.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,30 +29,46 @@ public class TeamController {
         model.addAttribute("users", userRepository.findAll());
         return "addTeam";
     }
+//    @RequestParam(required = false) Integer teamId,
+//    @PostMapping("") //user isn't being selected for team. think requestparam is teamId...? changed class type from user to team.
+//    private String displayTeam(@ModelAttribute @Valid Team newTeam,
+//                               Errors errors, @RequestParam(required = false) Integer teamId, Model model) {
+//
+//        if (errors.hasErrors()) {
+//            model.addAttribute("title", "Add teams");
+//            return "addTeam";
+//        }
+//
+//        if (teamId == null) {
+//            model.addAttribute("title", "All teams");
+//            model.addAttribute("teams", teamRepository.findAll());
+//        } else {
+//            Optional<Team> result = teamRepository.findById(teamId);
+//            if (result.isEmpty()) {
+//                model.addAttribute("title", "Invalid id.");
+//            } else {
+//                Team team = result.get();
+//                model.addAttribute("title", "Team in category: " + newTeam.getName());
+//                model.addAttribute("team", newTeam.getUsers());
+//            }
+//        }
+//
+//        teamRepository.save(newTeam);
+//
+//        return "/view";
+//    }
 
-    @PostMapping("") //user isn't being selected for team. think requestparam is teamId...? changed class type from user to team.
-    private String displayTeam(@ModelAttribute @Valid Team newTeam,
-                               Errors errors, @RequestParam(required = false) Integer teamId, Model model) {
+    @PostMapping("")
+    private String displayTeam(@ModelAttribute @Valid Team team,
+                               Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("users", userRepository.findAll());
             return "addTeam";
         }
 
-        if (teamId == null) {
-            model.addAttribute("title", "All teams");
-            model.addAttribute("teams", teamRepository.findAll());
-        } else {
-            Optional<Team> result = teamRepository.findById(teamId);
-            if (result.isEmpty()) {
-                model.addAttribute("title", "Invalid id.");
-            } else {
-                Team team = result.get();
-                model.addAttribute("title", "Team in category: " + newTeam.getName());
-                model.addAttribute("team", newTeam.getUsers());
-            }
-        }
-
-        teamRepository.save(newTeam);
+        teamRepository.save(team);
+        model.addAttribute("teams", teamRepository.findAll());
 
         return "/view";
     }
@@ -59,8 +76,33 @@ public class TeamController {
     @GetMapping("view")
     private String index(Model model) {
         model.addAttribute("teams", teamRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
         return "view";
     }
+
+//    @GetMapping("view")
+//    private String index(@RequestParam(defaultValue = "") Integer teamId, Model model) {
+//
+//        if (teamId == null) {
+//            model.addAttribute("title", "Invalid Id: " + teamId);
+//            model.addAttribute("teams", teamRepository.findAll());
+//            model.addAttribute("read", "reads if (userId == null) statement");
+//        } else {
+//            model.addAttribute("read", "reads else statement");
+//            Optional<User> result = userRepository.findById(teamId);
+//            if (result.isEmpty()) {
+//                model.addAttribute("read", "reads if (result.isEmpty()) statement");
+//                model.addAttribute("title", "Invalid User Id");
+//            } else {
+//                model.addAttribute("read", "reads second else statement");
+//                User user = result.get();
+//                model.addAttribute("users", user.getUsername());
+//            }
+//        }
+//
+//        model.addAttribute("teams", teamRepository.findAll());
+//        return "view";
+//    }
 
 
 }

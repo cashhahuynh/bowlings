@@ -8,13 +8,23 @@
 <table class="table table-striped">
     <thred>
         <tr>
-            <th>Team:</th>
-            <th>Team members:</th>
+            <th>Team Name:</th>
+            <th>Username:</th>
+            <th>User Id:</th>
+<!--            <th>Users:</th>-->
         </tr>
     </thred>
-    <tr th:each="team : ${teams}">
-        <td th:text="${team.name}"></td>
-        <td th:text="${team.users}"></td>
+<!--    <tr th:each="team : ${teams}">-->
+<!--        <td th:text="${team.id}"></td>-->
+<!--        <td th:text="${team.name}"></td>-->
+<!--        <td th:text="${team.users}"></td>-->
+
+<!--    </tr>-->
+    <tr th:each="user : ${users}">
+        <td th:text="${user.team}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.id}"></td>
+
     </tr>
 </table>
 

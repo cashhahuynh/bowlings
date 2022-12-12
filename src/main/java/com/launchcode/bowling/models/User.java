@@ -25,7 +25,7 @@ public class User extends AbstractEntity{
 //    @ManyToMany
 //    @JoinColumn(name = "user_id")
     @OneToMany(mappedBy = "user")
-    private final List<Score> scores = new ArrayList<>();
+    private List<Score> scores = new ArrayList<>();
 
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
