@@ -10,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -30,37 +33,42 @@ public class TeamController {
         return "addTeam";
     }
 
-    @PostMapping("") //user isn't being selected for team. think requestparam is teamId...? changed class type from user to team.
-    private String displayTeam(@ModelAttribute @Valid Team newTeam,
-                               Errors errors, @RequestParam(required = false) Integer teamId, Model model) {
+    @PostMapping("")
+    private String displayTeam(@ModelAttribute @Valid Team team,
+                               Errors errors, Model model) {
 
         if (errors.hasErrors()) {
+            model.addAttribute("users", userRepository.findAll());
             return "addTeam";
         }
 
-        if (teamId == null) {
-            model.addAttribute("title", "All teams");
-            model.addAttribute("teams", teamRepository.findAll());
-        } else {
-            Optional<Team> result = teamRepository.findById(teamId);
-            if (result.isEmpty()) {
-                model.addAttribute("title", "Invalid id.");
-            } else {
-                Team team = result.get();
-                model.addAttribute("title", "Team in category: " + newTeam.getName());
-//                model.addAttribute("team", newTeam.getUsers());
-            }
-        }
-
-        teamRepository.save(newTeam);
+        teamRepository.save(team);
+        model.addAttribute("teams", teamRepository.findAll());
 
         return "/view";
     }
 
     @GetMapping("view")
-    private String index(Model model) {
+    private String index(@RequestParam(defaultValue = "193") Integer userId, Model model) {
+
+        if (userId == null) {
+            model.addAttribute("title", "Invalid Id: " + userId);
+            model.addAttribute("teams", teamRepository.findAll());
+            model.addAttribute("read", "reads if (userId == null) statement");
+        } else {
+            model.addAttribute("read", "reads else statement");
+            Optional<User> result = userRepository.findById(userId);
+            if (result.isEmpty()) {
+                model.addAttribute("read", "reads if (result.isEmpty()) statement");
+                model.addAttribute("title", "Invalid User Id");
+            } else {
+                model.addAttribute("read", "reads second else statement");
+                User user = result.get();
+                model.addAttribute("users", user.getUsername());
+            }
+        }
+
         model.addAttribute("teams", teamRepository.findAll());
-        model.addAttribute("users", teamRepository.findAll());
         return "view";
     }
 

@@ -7,14 +7,18 @@
 
 <div class="container body-content">
 
+    <p th:text="${read}"></p>
+
         <table th:each="team : ${teams}">
         <tr>
             <th>ID:</th>
             <th>Team:</th>
+            <th>Users:</th>
         </tr>
         <tr>
             <td th:text="${team.id}"></td>
             <td th:text="${team.name}"></td>
+            <td th:text="${team.users}"></td>
         </tr>
         </table>
 

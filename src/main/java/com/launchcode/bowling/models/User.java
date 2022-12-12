@@ -14,6 +14,7 @@ public class User extends AbstractEntity{
     @NotNull
     private String pwHash;
 
+    //12/6 edit
     @ManyToOne()
     private Team team;
 
