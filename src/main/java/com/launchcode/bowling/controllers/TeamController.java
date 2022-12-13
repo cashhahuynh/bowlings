@@ -23,12 +23,88 @@ public class TeamController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("")
-    private String addTeamDisplay(Model model) {
+    @GetMapping("view")
+    private String index(Model model) {
+        model.addAttribute("teams", teamRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
+        return "team/view";
+    }
+
+    @GetMapping("assignTeam")
+    private String assignTeamDisplay(Model model) {
+        model.addAttribute("teams", teamRepository.findAll());
+        model.addAttribute("users", userRepository.findAll());
+        return "team/assignTeam";
+    }
+
+    @PostMapping("assignTeam")
+    private String assignTeam(@ModelAttribute @Valid Team team,
+                              Errors errors, Model model) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("users", userRepository.findAll());
+            return "team/assignTeam";
+        }
+
+        teamRepository.save(team);
+        model.addAttribute("teams", teamRepository.findAll());
+
+        return "team/view";
+    }
+
+    @GetMapping("createTeam")
+    private String createTeamDisplay(Model model) {
         model.addAttribute(new Team());
         model.addAttribute("users", userRepository.findAll());
-        return "addTeam";
+        return "team/createTeam";
     }
+
+
+    @PostMapping("createTeam")
+    private String createTeam(@ModelAttribute @Valid Team team,
+                               Errors errors, Model model) {
+
+//        if (errors.hasErrors()) {
+//            model.addAttribute("users", userRepository.findAll());
+//            return "team/createTeam";
+//        }
+
+        teamRepository.save(team);
+        model.addAttribute("teams", teamRepository.findAll());
+
+        return "team/view";
+    }
+
+
+
+//    @GetMapping("view")
+//    private String index(@RequestParam(defaultValue = "") Integer teamId, Model model) {
+//
+//        if (teamId == null) {
+//            model.addAttribute("title", "Invalid Id: " + teamId);
+//            model.addAttribute("teams", teamRepository.findAll());
+//            model.addAttribute("read", "reads if (userId == null) statement");
+//        } else {
+//            model.addAttribute("read", "reads else statement");
+//            Optional<User> result = userRepository.findById(teamId);
+//            if (result.isEmpty()) {
+//                model.addAttribute("read", "reads if (result.isEmpty()) statement");
+//                model.addAttribute("title", "Invalid User Id");
+//            } else {
+//                model.addAttribute("read", "reads second else statement");
+//                User user = result.get();
+//                model.addAttribute("users", user.getUsername());
+//            }
+//        }
+//
+//        model.addAttribute("teams", teamRepository.findAll());
+//        return "view";
+//    }
+
+
+}
+
+
 //    @RequestParam(required = false) Integer teamId,
 //    @PostMapping("") //user isn't being selected for team. think requestparam is teamId...? changed class type from user to team.
 //    private String displayTeam(@ModelAttribute @Valid Team newTeam,
@@ -57,52 +133,3 @@ public class TeamController {
 //
 //        return "/view";
 //    }
-
-    @PostMapping("")
-    private String displayTeam(@ModelAttribute @Valid Team team,
-                               Errors errors, Model model) {
-
-        if (errors.hasErrors()) {
-            model.addAttribute("users", userRepository.findAll());
-            return "addTeam";
-        }
-
-        teamRepository.save(team);
-        model.addAttribute("teams", teamRepository.findAll());
-
-        return "/view";
-    }
-
-    @GetMapping("view")
-    private String index(Model model) {
-        model.addAttribute("teams", teamRepository.findAll());
-        model.addAttribute("users", userRepository.findAll());
-        return "view";
-    }
-
-//    @GetMapping("view")
-//    private String index(@RequestParam(defaultValue = "") Integer teamId, Model model) {
-//
-//        if (teamId == null) {
-//            model.addAttribute("title", "Invalid Id: " + teamId);
-//            model.addAttribute("teams", teamRepository.findAll());
-//            model.addAttribute("read", "reads if (userId == null) statement");
-//        } else {
-//            model.addAttribute("read", "reads else statement");
-//            Optional<User> result = userRepository.findById(teamId);
-//            if (result.isEmpty()) {
-//                model.addAttribute("read", "reads if (result.isEmpty()) statement");
-//                model.addAttribute("title", "Invalid User Id");
-//            } else {
-//                model.addAttribute("read", "reads second else statement");
-//                User user = result.get();
-//                model.addAttribute("users", user.getUsername());
-//            }
-//        }
-//
-//        model.addAttribute("teams", teamRepository.findAll());
-//        return "view";
-//    }
-
-
-}
