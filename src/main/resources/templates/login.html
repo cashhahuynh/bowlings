@@ -3,6 +3,9 @@
 <head th:replace="fragments :: head"></head>
 <body class="container body-content">
 
+
+<!--add logo here-->
+
 <nav th:replace="fragments :: header"></nav>
 
 <form method="post">
@@ -22,7 +25,7 @@
     <input type="submit" class="btn btn-primary" value="Log In" />
 </form>
 
-<p>Don't have an account? <a href="/register">Register for one.</a></p>
+<p class="registrationStatement" >Don't have an account? <a href="/register">Click here to register.</a></p>
 
 </body>
 </html>
