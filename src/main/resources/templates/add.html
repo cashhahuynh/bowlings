@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: header"></nav>
+
+<h1>Add Score</h1>
+
+<form method="post" style="max-width:600px;">
+  <div class="form-group">
+    <label th:for="score">Game One Score</label>
+    <input class="form-control" th:field="${score.gameOneScore}" />
+    <span th:errors="${score.gameOneScore}" class="error"></span>
+  </div>
+  <div class="form-group">
+    <label th:for="score">Game Two Score</label>
+    <input class="form-control" th:field="${score.gameTwoScore}" />
+    <span th:errors="${score.gameTwoScore}" class="error"></span>
+  </div>
+  <div class="form-group">
+    <label th:for="score">Game Three Score</label>
+    <input class="form-control" th:field="${score.gameThreeScore}" />
+    <span th:errors="${score.gameThreeScore}" class="error"></span>
+  </div>
+
+<!--  <div class="form-group" id="userSelection">-->
+<!--    <label th:for="user">User</label>-->
+<!--    <select name="userId">-->
+<!--      <option value="0"> </option>-->
+<!--      <option th:each="user : ${users}"-->
+<!--              th:text="${user.username}"-->
+<!--              th:value="${user.id}"></option>-->
+<!--    </select>-->
+<!--  </div>-->
+
+  <div class="form-group">
+    <label>User
+      <select th:field="${score.user}">
+        <option th:each="user : ${users}"
+                th:value="${user.id}"
+                th:text="${user.username}"
+        ></option>
+      </select>
+      <p class="error" th:errors="${score.user}"></p>
+    </label>
+  </div>
+
+<!--    <div class="form-group">-->
+<!--      <label th:for="users">Users:</label>-->
+<!--      <th:block th:each="user : ${users}">-->
+<!--        <input type="checkbox" name="users" th:value="${user.id}"/>-->
+<!--        <label th:text="${user.username}"></label>-->
+<!--      </th:block>-->
+<!--    </div>-->
+
+
+  <input type="submit" value="Add Score" />
+</form>
+
+</body>
+</html>
