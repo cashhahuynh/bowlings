@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: header"></nav>
+
+<h1>Create Team</h1>
+
+<form method="post" style="max-width:600px;">
+  <div class="form-group">
+    <label th:for="team">Team name:</label>
+    <input class="form-control" th:field="${team.name}" id="team" />
+    <span th:errors="${team.name}" class="error"></span>
+  </div>
+
+<!--  <div class="form-group">-->
+<!--    <label th:for="users">Users:</label>-->
+<!--    <th:block th:each="user : ${users}">-->
+<!--      <input type="checkbox" name="users" th:value="${user.id}"/>-->
+<!--      <label th:text="${user.username}"></label>-->
+<!--    </th:block>-->
+<!--  </div>-->
+
+<!--  <div class="form-group">-->
+<!--    <label>User-->
+<!--      <select th:field="${team.users}">-->
+<!--        <option th:each="user : ${users}"-->
+<!--                th:value="${user.id}"-->
+<!--                th:text="${user.username}"-->
+<!--        ></option>-->
+<!--      </select>-->
+<!--      <p class="error" th:errors="${team.users}"></p>-->
+<!--    </label>-->
+<!--  </div>-->
+
+  <input type="submit" value="Add Team" />
+</form>
+
+</body>
+</html>

@@ -1,9 +1,12 @@
 package com.launchcode.bowling.models.data;
 
-import com.launchcode.bowling.models.Admin;
+import com.launchcode.bowling.models.Team;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminRepository extends CrudRepository<Admin, Integer> {
+public interface TeamRepository extends CrudRepository<Team, Integer> {
+
+    //something
+
 }
