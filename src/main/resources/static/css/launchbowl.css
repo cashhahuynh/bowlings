@@ -22,3 +22,28 @@ tr:nth-child(odd) {
     visibility: hidden;
 }
 
+.registrationStatement{
+color: Tomato !important;
+}
+
+.developImg{
+position: absolute; width: 50%; height: 0; padding-top: 50%;
+ padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); overflow: hidden;
+ border-radius: 8px; will-change: transform; text-align: center;
+ top: 10; right: 0; bottom: 1000; left: 0; margin: auto;
+}
+
+.whiteSpace{
+padding: 25%;
+}
+
+.backgroundLogo{
+position: transform;
+opacity: 0.2;
+text-align: center;
+left: 20;
+}
+
+.center{
+text-align: center;
+}

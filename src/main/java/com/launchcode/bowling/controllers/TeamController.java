@@ -71,7 +71,7 @@ public class TeamController {
 
         teamRepository.save(team);
         model.addAttribute("teams", teamRepository.findAll());
-
+        model.addAttribute("users", userRepository.findAll());
         return "team/view";
     }
 
