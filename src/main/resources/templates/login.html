@@ -22,11 +22,10 @@
         </label>
         <p class="error" th:errors="${loginFormDTO.password}"></p>
     </div>
-
-    <input type="submit" class="btn btn-primary" value="Log In" />
+    <input type="submit" class="btn btn-primary loginButton" value="Log In" />
 </form>
 
-<p class="registrationStatement">Don't have an account? <a href="/register">Register for one.</a></p>
+<p class="registrationStatement">Don't have an account? <a class="regState" href="/register">Click here to register.</a></p>
 
 </div>
 

@@ -47,3 +47,11 @@ left: 20;
 .center{
 text-align: center;
 }
+
+.regState{
+color: LightSkyBlue;
+}
+
+.loginButton{
+background-color: MidnightBlue;
+}
