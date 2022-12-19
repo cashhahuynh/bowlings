@@ -1,33 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
 
-<h1>Login</h1>
+<nav th:replace="fragments :: header"></nav>
 
-<form>
-    <div>
-        <label for="submit">Username</label>
-        <input type="text" class="submit" id="submit"/>
-    </div>
+<!--<div class="container body-content">-->
+<!--    <h2>LaunchBowl</h2>-->
+<!--    <ul>-->
+<!--        <li th:each="score : ${scores}">-->
+<!--        <li th:each="user : ${users}">-->
+<!--        </li>-->
+<!--    </ul>-->
 
-    <div>
-        <label for ="password">Password</label>
-        <input type="password" class="password" id="password"/>
-    </div>
-
-    <div>
-        <input type="submit"/>
-    </div>
-
-</form>
-
-<div>
-    <a href="register">Register here</a>
-</div>
-
+<!--</div>-->
+    <table class="table table-striped">
+        <thred>
+            <tr>
+                <th>User:</th>
+                <th>Game One Score:</th>
+                <th>Game Two Score:</th>
+                <th>Game Three Score:</th>
+                <th>Team:</th>
+            </tr>
+        </thred>
+<!--        <tr th:each="user : ${users}">-->
+<!--            <td th:text="${user.username}"></td>-->
+<!--            <td th:text="${user.team.name}"></td>-->
+<!--            <td th:href="@{'/employers/view/' + ${job.employer.id}}" th:text="${job.employer.name}"></td>-->
+<!--        <tr th:each="score : ${scores}">-->
+<!--            <td th:text="${score.gameOneScore}"></td>-->
+<!--            <td th:text="${user.team}"></td>-->
+        </tr>
+        <tr th:each="score : ${scores}">
+            <td th:text="${score.user.username}"></td>
+            <td th:text="${score.gameOneScore}"></td>
+            <td th:text="${score.gameTwoScore}"></td>
+            <td th:text="${score.gameThreeScore}"></td>
+            <td th:text="${score.user.team}"></td>
+            <!--            <td th:text="${score.user.score}"></td>-->
+            <!--            <td th:text="${user.team}"></td>-->
+        </tr>
+    </table>
+<!--<img src = "/Users/kathlyn/Downloads/LaunchBowl"-->
 </body>
 </html>

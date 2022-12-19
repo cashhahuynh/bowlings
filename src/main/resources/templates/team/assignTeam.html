@@ -1,0 +1,106 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org/">-->
+<!--<head th:replace="fragments :: head"></head>-->
+<!--<body class="container body-content">-->
+
+<!--<nav th:replace="fragments :: header"></nav>-->
+
+<!--<h1>Assign Team</h1>-->
+
+<!--<form method="post" style="max-width:600px;">-->
+<!--  <div class="form-group">-->
+<!--    <label>Team-->
+<!--      <select th:field="${team}">-->
+<!--        <option th:each="team : ${teams}"-->
+<!--                th:value="${team.id}"-->
+<!--                th:text="${team.name}"-->
+<!--        ></option>-->
+<!--      </select>-->
+<!--      <p class="error" th:errors="${team.name}"></p>-->
+<!--    </label>-->
+<!--  </div>-->
+<!--&lt;!&ndash;  <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;    <label th:for="team">Team name:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;    <input class="form-control" th:field="${team.name}" id="team" />&ndash;&gt;-->
+<!--&lt;!&ndash;    <span th:errors="${team.name}" class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;  </div>&ndash;&gt;-->
+
+<!--  <div class="form-group">-->
+<!--    <label th:for="users">Users:</label>-->
+<!--    <th:block th:each="user : ${users}">-->
+<!--      <input type="checkbox" name="users" th:value="${user.id}"/>-->
+<!--      <label th:text="${user.username}"></label>-->
+<!--    </th:block>-->
+<!--  </div>-->
+
+<!--&lt;!&ndash;    <div class="form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;      <label>User&ndash;&gt;-->
+<!--&lt;!&ndash;        <select th:field="${team.users}">&ndash;&gt;-->
+<!--&lt;!&ndash;          <option th:each="user : ${users}"&ndash;&gt;-->
+<!--&lt;!&ndash;                  th:value="${user.id}"&ndash;&gt;-->
+<!--&lt;!&ndash;                  th:text="${user.username}"&ndash;&gt;-->
+<!--&lt;!&ndash;          ></option>&ndash;&gt;-->
+<!--&lt;!&ndash;        </select>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p class="error" th:errors="${team.users}"></p>&ndash;&gt;-->
+<!--&lt;!&ndash;      </label>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--  <input type="submit" value="Assign Team" />-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">
+
+<nav th:replace="fragments :: header"></nav>
+
+<h1>Assign Team</h1>
+
+<!--<form method="post" style="max-width:600px;">-->
+<!--  <div class="form-group">-->
+<!--    <label th:for="team">Team name:</label>-->
+<!--    <input class="form-control" th:field="${team.name}" id="team" />-->
+<!--    <span th:errors="${team.name}" class="error"></span>-->
+<!--  </div>-->
+
+<!--<div class="form-group">-->
+<!--  <label>Team-->
+<!--    <select th:field="${team.users}">-->
+<!--      <option th:each="team : ${teams}"-->
+<!--              th:value="${team.id}"-->
+<!--              th:text="${team.name}"-->
+<!--      ></option>-->
+<!--    </select>-->
+<!--    <p class="error" th:errors="${team.users}"></p>-->
+<!--  </label>-->
+<!--</div>-->
+
+  <div class="form-group">
+    <label>Team</label>
+    <select name="teamId">
+      <option value="0"> </option>
+      <option th:each="team : ${teams}"
+              th:text="${team.name}"
+              th:value="${team.id}"></option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label th:for="users">Users:</label>
+    <th:block th:each="user : ${users}">
+      <input type="checkbox" name="users" th:value="${user.id}"/>
+      <label th:text="${user.username}"></label>
+    </th:block>
+  </div>
+
+
+
+  <input type="submit" value="Assign Team" />
+</form>
+
+</body>
+</html>
